@@ -9,9 +9,9 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 */
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
-import './axios.js'
+import './axios'
 import './config'
-import './index.css'
+import './index.scss'
 import registerServiceWorker from './registerServiceWorker'
 
 import reducers from './reducer.js'

@@ -1,0 +1,13 @@
+{
+  "aside": {
+    "home": "主页",
+    "user": {
+      "user_order": "用户订单",
+      "user_message": "用户留言"
+    },
+    "shop": {
+      "shop_entering": "录入",
+      "shop_issue": "商品发布"
+    }
+  }
+}
