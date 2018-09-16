@@ -3,35 +3,34 @@ import qs from 'qs'
 import React from 'react'
 
 const instance = axios.create({
-  timeout:1000,
-  headers:{
+  timeout: 1000,
+  headers: {
     'Content-Type': 'application/x-www-form-urlencoded'
   },
-  responseType:'json',
-  transformRequest:[
-    function(data){
+  responseType: 'json',
+  transformRequest: [
+    function (data) {
       return qs.stringify(data);
     }
   ]
 })
 React.Component.prototype.$http = instance;
 instance.interceptors.request.use(
-  config =>{
+  config => {
     return config;
   },
-  err=>{
-    return Promise.reject(err);    
+  err => {
+    return Promise.reject(err);
   }
 )
 instance.interceptors.response.use(
-  response =>{
-    console.log(response,123)
-    if(response.data.status === "401"){
+  response => {
+    if (response.data.status === "401") {
       alert("session已过期")
     }
     return response;
   },
-  error =>{
+  error => {
     return Promise.reject(error.response.data);
   }
 )

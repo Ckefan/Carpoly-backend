@@ -18,8 +18,10 @@ const SubMenu = Menu.SubMenu;
 @withRouter
 class App extends Component {
 	state = {
-		current: "mail",
+		current: "home",
+		collapsed: false,
 	}
+
 	componentDidMount() {
 		this.props.Login();
 	}
@@ -27,43 +29,50 @@ class App extends Component {
 		this.setState({
 			current: e.key,
 		})
+		console.log(e.key)
 		this.props.history.push(`/manager/${e.key}`)
+	}
+	showList = () => {
+		this.setState({
+			collapsed: !this.props.collapsed,
+		})
 	}
 	render() {
 		let img = require(`./images/wallpaper${this.props.num}.jpg`);
 		document.body.style.backgroundImage = `url(${img})`;
-
 		return (
 			<Layout style={{ minHeight: '100vh' }}>
 				<Sider trigger={null} collapsible collapsed={this.state.collapsed}>
-					<div className="logo">Carpoly管理后台</div>
-					<Menu mode="inline" theme="dark" inlineCollapsed={false} onClick={this.handleClick} defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']} selectedKeys={[this.state.current]} >
+					<div className={this.props.collapsed ? "mini" : "logo"} >Carpoly管理后台</div>
+					<Menu mode="inline" theme="dark" inlineCollapsed={false} onClick={this.handleClick} selectedKeys={[this.state.current]} >
 						<Menu.Item key="home">
-							<Icon type="mail" />
+							<Icon type="home" />
 							<span>主页</span>
 						</Menu.Item>
-						<Menu.Item title={<span><Icon type="appstore" />用户中心</span>}>
-							<Menu.Item key="homeSet">用户订单</Menu.Item>
-							<Menu.Item key="shopSet">用户留言</Menu.Item>
-						</Menu.Item>
-						<SubMenu title={<span><Icon type="setting" />商品管理</span>}>
-							<Menu.Item key="homeSet">商品录入</Menu.Item>
-							<Menu.Item key="homeSet">商品发布</Menu.Item>
-							<Menu.Item key="shopSet">商品下架</Menu.Item>
-							<Menu.Item key="shopSet">商品优惠</Menu.Item>
-							<Menu.Item key="shopSet">商品分类</Menu.Item>
+						<SubMenu title={<span><Icon type="appstore" /><span>用户中心</span></span>}>
+							<Menu.Item key="user_order">用户订单</Menu.Item>
+							<Menu.Item key="user_message">用户留言</Menu.Item>
 						</SubMenu>
-						<Menu.Item title={<span><Icon type="bar-chart" />数据统计</span>}>
-							<Menu.Item key="homeSet">订单统计</Menu.Item>
-							<Menu.Item key="shopSet">商品统计</Menu.Item>
-							<Menu.Item key="shopSet">用户统计</Menu.Item>
-						</Menu.Item>
+						<SubMenu title={<span><Icon type="setting" /><span>商品管理</span></span>}>
+							<Menu.Item key="shop_entering">录入商品</Menu.Item>
+							<Menu.Item key="shop_issue">发布商品</Menu.Item>
+							<Menu.Item key="shop_sold_out">下架商品</Menu.Item>
+							<Menu.Item key="shop_discount">商品优惠</Menu.Item>
+						</SubMenu>
+						<SubMenu title={<span><Icon type="bar-chart" /><span>数据统计</span></span>}>
+							<Menu.Item key="count_order">订单统计</Menu.Item>
+							<Menu.Item key="count_user">用户统计</Menu.Item>
+							<Menu.Item key="count_user1">用户统计1</Menu.Item>
+							<Menu.Item key="count_user2">用户统计2</Menu.Item>
+
+						</SubMenu>
 					</Menu>
 				</Sider>
 
 				<Layout className="main">
 					<Header className="header">
-						<Icon type="menu-unfold" />
+						<Icon type="menu-unfold" onClick={this.showList} />
+						123123
 					</Header>
 					<Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
 						<Switch>

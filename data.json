@@ -6,8 +6,12 @@
       "user_message": "用户留言"
     },
     "shop": {
-      "shop_entering": "录入",
-      "shop_issue": "商品发布"
-    }
+      "shop_entering": "录入商品",
+      "shop_issue": "发布商品",
+      "shop_sold_out": "下架商品",
+      "shop_discount": "商品优惠"
+    },
+    "count_order": "订单统计",
+    "count_user": "用户统计"
   }
 }
