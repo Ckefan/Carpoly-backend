@@ -15,7 +15,7 @@ import './index.scss'
 import registerServiceWorker from './registerServiceWorker'
 
 import reducers from './reducer.js'
-import login from './container/login/login.js'
+import login from './container/login/login'
 import manager from './manager'
 
 

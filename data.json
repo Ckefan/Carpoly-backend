@@ -2,16 +2,18 @@
   "aside": {
     "home": "主页",
     "user": {
-      "user_order": "用户订单",
-      "user_message": "用户留言"
+      "order": "用户订单",
+      "message": "用户留言"
     },
     "shop": {
-      "shop_entering": "录入商品",
-      "shop_issue": "发布商品",
-      "shop_sold_out": "下架商品",
-      "shop_discount": "商品优惠"
+      "entering": "录入商品",
+      "issue": "发布商品",
+      "sold_out": "下架商品",
+      "discount": "商品优惠"
     },
-    "count_order": "订单统计",
-    "count_user": "用户统计"
+    "count": {
+      "order": "订单统计",
+      "user": "用户统计"
+    }
   }
 }
