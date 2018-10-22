@@ -8,7 +8,7 @@ import user_order from './container/user/order/order'
 import user_message from './container/user/message/message'
 
 import shop_discount from './container/shop/discount/discount'
-import shop_entering from './container/shop/entering/entering'
+import shop_entry from './container/shop/entry/entry'
 import shop_issue from './container/shop/issue/issue'
 import shop_sold_out from './container/shop/sold_out/sold_out'
 
@@ -20,7 +20,6 @@ import { Login } from './redux/Auth.redux'
 
 const { Header, Sider, Content } = Layout;
 const SubMenu = Menu.SubMenu;
-
 @connect(
 	state => ({ num: state.bg, isAuth: state.auth.isAuth }),
 	{ Login }
@@ -54,7 +53,7 @@ class App extends Component {
 							<span>主页</span>
 						</Menu.Item>
 						<SubMenu title={<span><Icon type="shop" theme="outlined" /><span>商品管理</span></span>}>
-							<Menu.Item key="shop_entering">录入商品</Menu.Item>
+							<Menu.Item key="shop_entry">录入商品</Menu.Item>
 							<Menu.Item key="shop_issue">发布商品</Menu.Item>
 							<Menu.Item key="shop_sold_out">下架商品</Menu.Item>
 							<Menu.Item key="shop_discount">商品优惠</Menu.Item>
@@ -82,7 +81,7 @@ class App extends Component {
 							<Route path="/manager/user_order" component={user_order}></Route>
 							<Route path="/manager/user_message" component={user_message}></Route>
 							<Route path="/manager/shop_discount" component={shop_discount}></Route>
-							<Route path="/manager/shop_entering" component={shop_entering}></Route>
+							<Route path="/manager/shop_entry" component={shop_entry}></Route>
 							<Route path="/manager/shop_issue" component={shop_issue}></Route>
 							<Route path="/manager/shop_sold_out" component={shop_sold_out}></Route>
 							<Route path="/manager/count_order" component={count_order}></Route>

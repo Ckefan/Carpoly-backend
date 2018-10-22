@@ -1,19 +1,54 @@
 {
-  "aside": {
-    "home": "主页",
-    "user": {
-      "order": "用户订单",
-      "message": "用户留言"
-    },
-    "shop": {
-      "entering": "录入商品",
-      "issue": "发布商品",
-      "sold_out": "下架商品",
-      "discount": "商品优惠"
-    },
-    "count": {
-      "order": "订单统计",
-      "user": "用户统计"
+  "web":{
+    "aside": {
+      "home": "主页",
+      "user": {
+        "order": "用户订单",
+        "message": "用户留言"
+      },
+      "shop": {
+        "entry": "录入商品",
+        "issue": "发布商品",
+        "sold_out": "下架商品",
+        "discount": "商品优惠"
+      },
+      "count": {
+        "order": "订单统计",
+        "user": "用户统计"
+      }
     }
-  }
+  },
+  "mysql":{
+    "user_info":[
+      "管理后台用户表", 
+      {
+      "username":"用户名",
+      "password":"密码",
+      "head_img":"用户头像",
+      "login_time":"登陆时间"
+      }
+    ]
+  },
+  "shop_details":[
+    "商品详情表",
+    {
+      "id":"商品id",
+      "sid": "商品分类id",
+      "name":"商品名称",
+      "price":"价格",
+      "discount":"折扣",
+      "created":"商品录入时间",
+      "status":"商品状态(1:上架，-1:下架,0:售完)",
+      "img":"商品图片",
+      "sales_num":"销售量"
+    }
+  ],
+  "shop_classify":[
+    "商品分类表",
+    {
+      "id":"分类id",
+      "pid":"父级分类",
+      "name":"分类名"
+    }
+  ]
 }
