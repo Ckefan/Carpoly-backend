@@ -31,8 +31,8 @@ const generateData = (_level, _preKey, _tns) => {
 };
 generateData(z);
 
-export class TreeClassify extends React.Component {
-  constructor(props){
+export class TreeClassify extends Component {
+  constructor(props) {
     super(props);
     console.log(this)
   }

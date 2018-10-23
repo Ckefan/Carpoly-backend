@@ -72,10 +72,10 @@ class App extends Component {
 				</Sider>
 
 				<Layout className="main">
-					<Header className="header">
+					<Header className="head">
 						123123
 					</Header>
-					<Content style={{ margin: '16px', padding: 24, background: '#fff', minHeight: 280 }}>
+					<Content style={{ margin: '16px', background: '#fff', minHeight: 280 }}>
 						<Switch>
 							<Route path="/manager/home" component={home}></Route>
 							<Route path="/manager/user_order" component={user_order}></Route>

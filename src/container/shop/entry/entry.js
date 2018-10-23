@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Layout } from 'antd'; 
+import { Layout } from 'antd'
+import './entry.scss'
 import { TreeClassify } from '../../../components/shop/tree_classify'
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Sider, Content } = Layout;
 const sData = [
   {
     "title": "1级",
@@ -27,20 +28,20 @@ const sData = [
 ]
 
 export class order extends Component {
-  state  = {
+  state = {
     sData
   }
-  
-  cClassify = (data)=>{
+
+  cClassify = (data) => {
     this.setState({
-      sData:data
+      sData: data
     })
   }
   render() {
     return (
-      <div>
+      <div className="shop_entry">
         <Layout >
-          <Header style={{ background: '#fff' }}>3632</Header>
+          <Header className="header" style={{ padding: 0, background: '#fff' }}>3632</Header>
           <Layout>
             <Sider style={{ background: '#fff' }}>
               <TreeClassify data={this.state.sData} classify={this.cClassify}></TreeClassify>

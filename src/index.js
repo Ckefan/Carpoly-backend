@@ -11,6 +11,7 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import './axios'
 import './config'
+import './static/css/variate.scss'
 import './index.scss'
 import registerServiceWorker from './registerServiceWorker'
 
