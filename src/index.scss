@@ -1,4 +1,4 @@
-*:not(input, textarea) {
+* :not(input, textarea) {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
@@ -40,6 +40,6 @@ body {
   .head {
     height: 50px;
     line-height: 50px;
-    padding: 0 10px; // background: #ffd100
+    padding: 0 10px;
   }
 }

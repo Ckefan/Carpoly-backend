@@ -1,6 +1,9 @@
-
-.shop_entry{
-  .header{
+.shop_entry {
+  .header {
     border-bottom: 1px solid $borderColor;
+  }
+  .ant-layout-header {
+    height: 50px;
+    line-height: 50px;
   }
 }

@@ -2,45 +2,49 @@ import React, { Component } from 'react'
 import { Tree } from 'antd';
 
 const TreeNode = Tree.TreeNode;
-
-const x = 3;
-const y = 2;
-const z = 1;
-const gData = [];
-
-const generateData = (_level, _preKey, _tns) => {
-  const preKey = _preKey || '0';
-  const tns = _tns || gData;
-
-  const children = [];
-  for (let i = 0; i < x; i++) {
-    const key = `${preKey}-${i}`;
-    tns.push({ title: key, key });
-    if (i < y) {
-      children.push(key);
-    }
-  }
-  if (_level < 0) {
-    return tns;
-  }
-  const level = _level - 1;
-  children.forEach((key, index) => {
-    tns[index].children = [];
-    return generateData(level, key, tns[index].children);
-  });
-};
-generateData(z);
+const dataList = [];
 
 export class TreeClassify extends Component {
   constructor(props) {
     super(props);
-    console.log(this)
+    this.props.onChange(this.onChange)
+
+    //搜索节点
+    this.generateList(this.props.data);
   }
   state = {
-    gData,
-    expandedKeys: ['0-0', '0-0-0', '0-0-0-0'],
+    gData: this.props.data,
+    expandedKeys: [],
+    searchValue: '',
+    autoExpandParent: true,
   }
+  getParentKey = (key, tree) => {
+    let parentKey;
+    for (let i = 0; i < tree.length; i++) {
+      const node = tree[i];
+      if (node.children) {
+        if (node.children.some(item => item.key === key)) {
+          parentKey = node.key;
+        } else if (this.getParentKey(key, node.children)) {
+          parentKey = this.getParentKey(key, node.children);
+        }
+      }
+    }
+    return parentKey;
+  };
+  generateList = (data) => {
+    for (let i = 0; i < data.length; i++) {
+      const node = data[i];
+      const key = node.key;
+      const title = node.title;
+      dataList.push({ key, title });
+      if (node.children) {
+        this.generateList(node.children, node.key);
+      }
+    }
+  };
 
+  //拖拽松手
   onDragEnter = (info) => {
     console.log(info);
     // expandedKeys 需要受控时设置
@@ -48,9 +52,8 @@ export class TreeClassify extends Component {
     //   expandedKeys: info.expandedKeys,
     // });
   }
-
+  //拖拽
   onDrop = (info) => {
-    // console.log(info);
     const dropKey = info.node.props.eventKey;
     const dragKey = info.dragNode.props.eventKey;
     const dropPos = info.node.props.pos.split('-');
@@ -91,27 +94,67 @@ export class TreeClassify extends Component {
         item.children.push(dragObj);
       });
     }
-    // this.setState({
-    //   gData: data,
-    // });
-    this.props.classify(data)
-    console.log(data)
-  }
 
-  render() {
-    const loop = data => data.map((item) => {
-      if (item.children && item.children.length) {
-        return <TreeNode key={item.key} title={item.title}>{loop(item.children)}</TreeNode>;
+    this.props.update(data)
+  }
+  //展开/收起节点时触发
+  onExpand = (expandedKeys) => {
+    this.setState({
+      expandedKeys,
+      autoExpandParent: false,
+    });
+  }
+  //搜索展开
+  onChange = (value) => {
+    const expandedKeys = dataList.map((item) => {
+      if (item.title.indexOf(value) > -1) {
+        return this.getParentKey(item.key, this.props.data);
       }
-      return <TreeNode key={item.key} title={item.title} />;
+      return null;
+    }).filter((item, i, self) => item && self.indexOf(item) === i);
+    this.setState({
+      expandedKeys,
+      searchValue: value,
+      autoExpandParent: true,
+    });
+  }
+  //选中节点，删除使用
+  onSelect = (e) => {
+    this.props.onSelect(e)
+  }
+  render() {
+    const { searchValue, expandedKeys, autoExpandParent } = this.state;
+    const loop = data => data.map((item) => {
+      const index = item.title.indexOf(searchValue);
+      const beforeStr = item.title.substr(0, index);
+      const afterStr = item.title.substr(index + searchValue.length);
+      const title = index > -1 ? (
+        <span>
+          {beforeStr}
+          <span style={{ color: '#f50' }}>{searchValue}</span>
+          {afterStr}
+        </span>
+      ) : <span>{item.title}</span>;
+      if (item.children) {
+        return (
+          <TreeNode key={item.key} title={title}>
+            {loop(item.children)}
+          </TreeNode>
+        );
+      }
+      return <TreeNode key={item.key} title={title} />;
     });
     return (
       <Tree
         className="draggable-tree"
-        defaultExpandedKeys={this.state.expandedKeys}
+        defaultExpandedKeys={expandedKeys}
         draggable
+        expandedKeys={expandedKeys}
+        autoExpandParent={autoExpandParent}
+        onExpand={this.onExpand}
         onDragEnter={this.onDragEnter}
         onDrop={this.onDrop}
+        onSelect={this.onSelect}
       >
         {loop(this.props.data)}
       </Tree>
