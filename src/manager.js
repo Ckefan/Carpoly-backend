@@ -46,7 +46,7 @@ class App extends Component {
 		return (
 			<Layout style={{ minHeight: '100vh' }}>
 				<Sider breakpoint="lg" collapsedWidth="0">
-					<div className="logo">袋鼠健康后台</div>
+					<div className="logo">嘉宝莉漆</div>
 					<Menu mode="inline" theme="dark" inlineCollapsed={false} onClick={this.handleClick} selectedKeys={[this.state.current]} >
 						<Menu.Item key="home">
 							<Icon type="home" />

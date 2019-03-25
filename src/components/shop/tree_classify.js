@@ -61,7 +61,7 @@ export class TreeClassify extends Component {
     // const dragNodesKeys = info.dragNodesKeys;
     const loop = (data, key, callback) => {
       data.forEach((item, index, arr) => {
-        if (item.key === key) {
+        if (item.key === +key) {
           return callback(item, index, arr);
         }
         if (item.children) {
@@ -94,7 +94,6 @@ export class TreeClassify extends Component {
         item.children.push(dragObj);
       });
     }
-
     this.props.update(data)
   }
   //展开/收起节点时触发
@@ -108,10 +107,14 @@ export class TreeClassify extends Component {
   onChange = (value) => {
     const expandedKeys = dataList.map((item) => {
       if (item.title.indexOf(value) > -1) {
+        debugger
         return this.getParentKey(item.key, this.props.data);
       }
       return null;
-    }).filter((item, i, self) => item && self.indexOf(item) === i);
+    }).filter(
+      (item, i, self) =>
+        item && self.indexOf(item) === i
+    );
     this.setState({
       expandedKeys,
       searchValue: value,

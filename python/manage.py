@@ -13,3 +13,13 @@ if __name__ == "__main__":
             "forget to activate a virtual environment?"
         ) from exc
     execute_from_command_line(sys.argv)
+
+
+# 简称models是否有改变
+# python3 manage.py makemigrations
+
+# models同步到数据库
+# python3 manage.py migrate
+
+# 数据库结构导入到models层
+# python manage.py inspectdb > app/models.py

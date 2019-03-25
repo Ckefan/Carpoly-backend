@@ -29,10 +29,15 @@ ALLOWED_HOSTS = ['www.ckefan.com', '127.0.0.1', '8080']
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin', 'django.contrib.auth',
-    'django.contrib.contenttypes', 'django.contrib.sessions',
-    'django.contrib.messages', 'django.contrib.staticfiles', 'verify',
-    'manager'
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'verify',
+    'manager',
+    'shop'
 ]
 
 MIDDLEWARE = [
